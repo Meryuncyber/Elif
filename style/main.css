@@ -1,1 +1,137 @@
+/* Temel reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0f172a;
+  color: #e2e8f0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+/* Başlık & Logo */
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #60a5fa;
+}
+
+p {
+  margin-top: 0.5rem;
+  color: #94a3b8;
+}
+
+/* Sürükle bırak alanı */
+#drop-area {
+  border: 2px dashed #60a5fa;
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+}
+
+#drop-area.dragover {
+  background-color: rgba(96, 165, 250, 0.1);
+}
+
+/* Yükleme butonu */
+.upload-btn {
+  display: inline-block;
+  background-color: #3b82f6;
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.upload-btn:hover {
+  background-color: #2563eb;
+}
+
+/* Önizleme alanı */
+#preview-area img {
+  max-width: 100%;
+  max-height: 300px;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(96, 165, 250, 0.2);
+}
+
+/* EXIF kutuları */
+.exif-box {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 0.9rem;
+  color: #f1f5f9;
+}
+
+/* Butonlar */
+#clean-btn,
+#download-link {
+  background-color: #10b981;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  margin: 1rem;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+}
+
+#clean-btn:hover,
+#download-link:hover {
+  background-color: #059669;
+}
+
+/* Gizli sınıf */
+.hidden {
+  display: none !important;
+}
+
+/* Footer */
+footer {
+  margin-top: auto;
+  text-align: center;
+  color: #64748b;
+  font-size: 0.8rem;
+  padding: 1rem 0;
+  border-top: 1px solid #334155;
+  width: 100%;
+  max-width: 600px;
+  }
