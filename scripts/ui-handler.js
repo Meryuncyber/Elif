@@ -1,23 +1,19 @@
-import { readExifData, formatExifData } from './exif-reader.js';
-import { removeExif } from './image-processor.js';
+document.addEventListener('DOMContentLoaded', function () {
+  // DOM elementleri
+  var dropArea = document.getElementById('drop-area');
+  var fileInput = document.getElementById('file-input');
+  var previewArea = document.getElementById('preview-area');
+  var previewImage = document.getElementById('preview-image');
+  var exifSection = document.getElementById('exif-section');
+  var exifBefore = document.getElementById('exif-before');
+  var exifAfter = document.getElementById('exif-after');
+  var actionSection = document.getElementById('action-section');
+  var cleanBtn = document.getElementById('clean-btn');
+  var downloadLink = document.getElementById('download-link');
 
-document.addEventListener('DOMContentLoaded', () => {
-  // DOM elemanlarını seç
-  const dropArea = document.getElementById('drop-area');
-  const fileInput = document.getElementById('file-input');
-  const previewArea = document.getElementById('preview-area');
-  const previewImage = document.getElementById('preview-image');
-  const exifSection = document.getElementById('exif-section');
-  const exifBefore = document.getElementById('exif-before');
-  const exifAfter = document.getElementById('exif-after');
-  const actionSection = document.getElementById('action-section');
-  const cleanBtn = document.getElementById('clean-btn');
-  const downloadLink = document.getElementById('download-link');
+  var currentFile = null;
+  var cleanedDataUrl = null;
 
-  let currentFile = null;
-  let cleanedDataUrl = null;
-
-  // Dosya işleme fonksiyonu
   function handleFile(file) {
     if (!file.type.startsWith('image/')) {
       alert('Lütfen JPEG veya PNG formatında bir görsel seçin.');
@@ -31,12 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
       URL.revokeObjectURL(previewImage.src);
     }
 
-    // Görsel önizleme
     previewImage.src = URL.createObjectURL(file);
     previewArea.classList.remove('hidden');
 
     // EXIF verisini oku ve göster
-    readExifData(file, (data) => {
+    readExifData(file, function (data) {
       exifBefore.textContent = formatExifData(data);
       exifSection.classList.remove('hidden');
       exifAfter.textContent = 'Henüz temizleme yapılmadı.';
@@ -48,19 +43,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Sürükle bırak eventi - dragover
-  dropArea.addEventListener('dragover', (e) => {
+  // Drag & Drop Eventleri
+  dropArea.addEventListener('dragover', function (e) {
     e.preventDefault();
     dropArea.classList.add('dragover');
   });
 
-  // dragleave
-  dropArea.addEventListener('dragleave', () => {
+  dropArea.addEventListener('dragleave', function () {
     dropArea.classList.remove('dragover');
   });
 
-  // drop eventi - dosya bırakma
-  dropArea.addEventListener('drop', (e) => {
+  dropArea.addEventListener('drop', function (e) {
     e.preventDefault();
     dropArea.classList.remove('dragover');
 
@@ -70,20 +63,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Dosya input değişimi
-  fileInput.addEventListener('change', () => {
+  fileInput.addEventListener('change', function () {
     if (fileInput.files.length > 0) {
       handleFile(fileInput.files[0]);
     }
   });
 
-  // Temizle butonu tıklama
-  cleanBtn.addEventListener('click', () => {
+  // Temizleme butonu
+  cleanBtn.addEventListener('click', function () {
     if (!currentFile) return;
 
     cleanBtn.disabled = true;
     cleanBtn.textContent = 'Temizleniyor...';
 
-    removeExif(currentFile, (cleanedUrl) => {
+    removeExif(currentFile, function (cleanedUrl) {
       cleanedDataUrl = cleanedUrl;
 
       downloadLink.href = cleanedDataUrl;
