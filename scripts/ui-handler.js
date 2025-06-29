@@ -2,7 +2,7 @@ import { readExifData, formatExifData } from './exif-reader.js';
 import { removeExif } from './image-processor.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Elementler
+  // DOM elemanlarını seç
   const dropArea = document.getElementById('drop-area');
   const fileInput = document.getElementById('file-input');
   const previewArea = document.getElementById('preview-area');
@@ -14,23 +14,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const cleanBtn = document.getElementById('clean-btn');
   const downloadLink = document.getElementById('download-link');
 
-  let currentFile = null;     // Şu an yüklenen dosya
-  let cleanedDataUrl = null;  // Temizlenmiş görselin DataURL’si
+  let currentFile = null;
+  let cleanedDataUrl = null;
 
-  // Dosya seçimi & yüklemesi
+  // Dosya işleme fonksiyonu
   function handleFile(file) {
     if (!file.type.startsWith('image/')) {
       alert('Lütfen JPEG veya PNG formatında bir görsel seçin.');
       return;
     }
+
     currentFile = file;
 
-    // Önizleme için URL oluştur
-    const objectUrl = URL.createObjectURL(file);
-    previewImage.src = objectUrl;
+    // Önceki URL varsa serbest bırak
+    if (previewImage.src) {
+      URL.revokeObjectURL(previewImage.src);
+    }
+
+    // Görsel önizleme
+    previewImage.src = URL.createObjectURL(file);
     previewArea.classList.remove('hidden');
 
-    // EXIF verisi oku
+    // EXIF verisini oku ve göster
     readExifData(file, (data) => {
       exifBefore.textContent = formatExifData(data);
       exifSection.classList.remove('hidden');
@@ -38,50 +43,54 @@ document.addEventListener('DOMContentLoaded', () => {
       actionSection.classList.remove('hidden');
       downloadLink.classList.add('hidden');
       cleanedDataUrl = null;
+      cleanBtn.disabled = false;
+      cleanBtn.textContent = 'EXIF Verilerini Temizle';
     });
   }
 
-  // Sürükle Bırak Olayları
+  // Sürükle bırak eventi - dragover
   dropArea.addEventListener('dragover', (e) => {
     e.preventDefault();
     dropArea.classList.add('dragover');
   });
 
+  // dragleave
   dropArea.addEventListener('dragleave', () => {
     dropArea.classList.remove('dragover');
   });
 
+  // drop eventi - dosya bırakma
   dropArea.addEventListener('drop', (e) => {
     e.preventDefault();
     dropArea.classList.remove('dragover');
 
-    if (e.dataTransfer.files.length) {
+    if (e.dataTransfer.files.length > 0) {
       handleFile(e.dataTransfer.files[0]);
     }
   });
 
-  // Dosya input değiştiğinde
+  // Dosya input değişimi
   fileInput.addEventListener('change', () => {
-    if (fileInput.files.length) {
+    if (fileInput.files.length > 0) {
       handleFile(fileInput.files[0]);
     }
   });
 
-  // Temizle butonu tıklanınca
+  // Temizle butonu tıklama
   cleanBtn.addEventListener('click', () => {
     if (!currentFile) return;
 
     cleanBtn.disabled = true;
     cleanBtn.textContent = 'Temizleniyor...';
 
-    removeExif(currentFile, (dataUrl) => {
-      cleanedDataUrl = dataUrl;
+    removeExif(currentFile, (cleanedUrl) => {
+      cleanedDataUrl = cleanedUrl;
 
-      // İndirme linkini güncelle
       downloadLink.href = cleanedDataUrl;
       downloadLink.classList.remove('hidden');
 
       exifAfter.textContent = 'EXIF verileri temizlendi. Artık güvenle paylaşabilirsiniz.';
+
       cleanBtn.disabled = false;
       cleanBtn.textContent = 'EXIF Verilerini Temizle';
     });
