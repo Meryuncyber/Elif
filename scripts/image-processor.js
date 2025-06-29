@@ -1,23 +1,28 @@
-// EXIF'siz görsel oluştur ve callback ile ver
-export function removeExif(file, callback) {
-  const reader = new FileReader();
+// EXIF'siz görsel oluştur ve callback ile sonucu ver
+function removeExif(file, callback) {
+  var reader = new FileReader();
 
   reader.onload = function (e) {
-    const img = new Image();
+    var img = new Image();
+
     img.onload = function () {
-      const canvas = document.createElement('canvas');
+      var canvas = document.createElement('canvas');
       canvas.width = img.width;
       canvas.height = img.height;
 
-      const ctx = canvas.getContext('2d');
+      var ctx = canvas.getContext('2d');
       ctx.drawImage(img, 0, 0);
 
-      // Temiz görselin DataURL’si (JPEG formatında)
-      const cleanedDataUrl = canvas.toDataURL('image/jpeg', 0.92);
+      // Temiz görselin DataURL'si (JPEG formatında, kalite %92)
+      var cleanedDataUrl = canvas.toDataURL('image/jpeg', 0.92);
       callback(cleanedDataUrl);
     };
+
     img.src = e.target.result;
   };
 
   reader.readAsDataURL(file);
 }
+
+// Global olarak erişilebilir yap
+window.removeExif = removeExif;
