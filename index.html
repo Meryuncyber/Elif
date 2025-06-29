@@ -1,1 +1,63 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elif</title>
+  <link rel="stylesheet" href="style/main.css" />
+  <link rel="icon" href="assets/logo.svg" />
+</head>
+<body>
 
+  <header>
+    <img src="assets/logo.svg" alt="Logo" class="logo" />
+    <h1>📸 Elif </h1>
+    <p>Görsel EXIF verilerini silin. Güvenle paylaşın.</p>
+  </header>
+
+  <main>
+    <!-- Sürükle Bırak Alanı -->
+    <section id="drop-area">
+      <p>📂 Görseli buraya sürükleyin veya</p>
+      <label class="upload-btn">
+        Görsel Yükle
+        <input type="file" id="file-input" accept="image/jpeg, image/png" hidden>
+      </label>
+    </section>
+
+    <!-- Önizleme -->
+    <section id="preview-area" class="hidden">
+      <h2>🖼️ Yüklenen Görsel:</h2>
+      <img id="preview-image" alt="Yüklenen Görsel" />
+    </section>
+
+    <!-- EXIF Bilgileri -->
+    <section id="exif-section" class="hidden">
+      <div class="exif-box">
+        <h3>📋 EXIF Verileri (Öncesi)</h3>
+        <pre id="exif-before"></pre>
+      </div>
+      <div class="exif-box">
+        <h3>✅ EXIF Verileri (Sonrası)</h3>
+        <pre id="exif-after">Henüz temizleme yapılmadı.</pre>
+      </div>
+    </section>
+
+    <!-- Temizle ve İndir -->
+    <section id="action-section" class="hidden">
+      <button id="clean-btn">EXIF Verilerini Temizle</button>
+      <a id="download-link" class="hidden" download="temiz-gorsel.jpg">Temiz Görseli İndir</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>🔒 Görsel verileri sadece cihazınızda işlenir. Sunucuya gönderilmez. MerYunCyber Güvencesiyle.</p>
+  </footer>
+
+  <!-- Scriptler -->
+  <script src="libs/exif.min.js"></script>
+  <script src="scripts/exif-reader.js"></script>
+  <script src="scripts/image-processor.js"></script>
+  <script src="scripts/ui-handler.js"></script>
+</body>
+  </html>
