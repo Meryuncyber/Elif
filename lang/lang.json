@@ -1,0 +1,20 @@
+{
+  "en": {
+    "title": "ELIF – Protect Your Privacy with One Click",
+    "upload": "Upload your image",
+    "download": "Download clean image",
+    "warning": "EXIF data may expose your location, device, and private details."
+  },
+  "tr": {
+    "title": "ELİF – Gizliliğini Tek Tıkla Koru",
+    "upload": "Görsel yükle",
+    "download": "Temiz görseli indir",
+    "warning": "EXIF verileri konum, cihaz ve kişisel bilgilerini açığa çıkarabilir."
+  },
+  "fr": {
+    "title": "ELIF – Protégez votre vie privée en un clic",
+    "upload": "Télécharger une image",
+    "download": "Télécharger l'image nettoyée",
+    "warning": "Les données EXIF peuvent révéler votre position, votre appareil et vos informations privées."
+  }
+}
