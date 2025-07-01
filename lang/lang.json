@@ -1,20 +1,30 @@
 {
   "en": {
-    "title": "ELIF – Protect Your Privacy with One Click",
-    "upload": "Upload your image",
-    "download": "Download clean image",
-    "warning": "EXIF data may expose your location, device, and private details."
+    "title": "Elif - Metadata Wiper Web",
+    "description": "Wipe image EXIF metadata. Share with confidence.",
+    "upload_label": "Upload Image",
+    "drag_text": "📂 Drag an image here or",
+    "uploaded_image": "🖼️ Uploaded Image:",
+    "exif_before": "📋 EXIF Data (Before)",
+    "exif_after": "✅ EXIF Data (After)",
+    "exif_wait": "Waiting for uploaded image...",
+    "exif_clean": "No cleaning done yet.",
+    "clean_btn": "Clean EXIF Data",
+    "download_btn": "Download Clean Image",
+    "footer_note": "🔒 Your images are processed on your device. Never uploaded. Secured by MerYunCyber."
   },
   "tr": {
-    "title": "ELİF – Gizliliğini Tek Tıkla Koru",
-    "upload": "Görsel yükle",
-    "download": "Temiz görseli indir",
-    "warning": "EXIF verileri konum, cihaz ve kişisel bilgilerini açığa çıkarabilir."
-  },
-  "fr": {
-    "title": "ELIF – Protégez votre vie privée en un clic",
-    "upload": "Télécharger une image",
-    "download": "Télécharger l'image nettoyée",
-    "warning": "Les données EXIF peuvent révéler votre position, votre appareil et vos informations privées."
+    "title": "Elif - Metadata Temizleyici Web",
+    "description": "Görsel EXIF verilerini silin. Güvenle paylaşın.",
+    "upload_label": "Görsel Yükle",
+    "drag_text": "📂 Görseli buraya sürükleyin veya",
+    "uploaded_image": "🖼️ Yüklenen Görsel:",
+    "exif_before": "📋 EXIF Verileri (Öncesi)",
+    "exif_after": "✅ EXIF Verileri (Sonrası)",
+    "exif_wait": "Yüklenen görsel bekleniyor...",
+    "exif_clean": "Henüz temizleme yapılmadı.",
+    "clean_btn": "EXIF Verilerini Temizle",
+    "download_btn": "Temiz Görseli İndir",
+    "footer_note": "🔒 Görsel verileri sadece cihazınızda işlenir. Sunucuya gönderilmez. MerYunCyber Güvencesiyle."
   }
 }
